@@ -24,4 +24,3 @@ class Solution:
             if v1 != v2:
                 return False
         return True
-            
