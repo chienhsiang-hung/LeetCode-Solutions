@@ -24,7 +24,3 @@ class Solution:
             current_ll = current_ll.next
         
         return new_ll.next
-        
-            
-            
-        
