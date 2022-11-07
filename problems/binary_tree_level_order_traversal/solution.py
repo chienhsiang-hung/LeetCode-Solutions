@@ -4,9 +4,6 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-# create a map to record the levels: to nodes
-# then join the nodes together
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         
@@ -25,4 +22,4 @@ class Solution:
             # return [(node.val, i)] + BFS_record_level(node.left, i+1) + BFS_record_level(node.right, i+1)
         BFS_record_level(root)
         return [v for _, v in level_map.items()]
-
+        
