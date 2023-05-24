@@ -10,12 +10,11 @@ class Solution:
         
         # time: O(n), space: O(1)
         
-        _min = prices[0]
+        min_ = prices[0]
         profit = 0
-        
-        for i, p in enumerate(prices):
-            _min = min(_min, p)
-            profit = max(profit, p-_min)
-        
-        return profit
+
+        for p in prices[1:]:
+            profit = max(profit, p-min_)
+            min_ = min(min_, p)
             
+        return profit
