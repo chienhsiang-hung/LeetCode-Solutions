@@ -1,16 +1,18 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        charMap = {} # key c, v i
-        maxLength = 0
+        if len(s) == 0: return 0
+        charSet = set()
+        l = 0
+        maxL = 0
 
-        for i in range(len(s)):
-            if s[i] not in charMap:
-                charMap[s[i]] = i
-                maxLength = max(maxLength, len(charMap))
+        for r in range(len(s)):
+            if s[r] not in charSet:
+                charSet.add(s[r])
+                maxL = max(maxL, r+1-l)
             else:
-                curCi = charMap[s[i]]
-                for k in list(charMap.keys()):
-                    if charMap[k] <= curCi:
-                        charMap.pop(k)
-                charMap[s[i]] = i
-        return maxLength
+                while s[l] != s[r]:
+                    charSet.remove(s[l])
+                    l += 1
+                    
+                l += 1
+        return max(maxL, r+1-l)
