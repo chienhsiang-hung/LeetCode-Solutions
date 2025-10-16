@@ -1,19 +1,26 @@
+'''
+[-1, 1,0,-3,3]
+[-1,-1,0, 0,0] fromL
+[ 0, 0,0,-9,3] fromR
+[ 0, 0,9, 0,0]
+'''
+from collections import deque
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        prefix = [nums[0]]
+        fromL = [nums[0]]
         for i in range(1, len(nums)):
-            prefix.append(prefix[i-1]*nums[i])
-        postfix = [None] * len(nums)
-        postfix[-1] = nums[-1]
+            fromL.append(fromL[-1]*nums[i])
+        
+        fromR = deque([nums[-1]])
         for i in range(len(nums)-2, -1, -1):
-            postfix[i] = postfix[i+1] * nums[i]
-        ans = [None] * len(nums)
+            fromR.appendleft(fromR[0]*nums[i])
+        
+        res = []
         for i in range(len(nums)):
             if i == 0:
-                ans[0] = postfix[1]
+                res.append(fromR[1])
             elif i == len(nums)-1:
-                ans[-1] = prefix[-2]
+                res.append(fromL[-2])
             else:
-                ans[i] = prefix[i-1] * postfix[i+1]
-        return ans
-            
+                res.append(fromL[i-1]*fromR[i+1])
+        return res
